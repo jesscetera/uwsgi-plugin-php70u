@@ -7,7 +7,7 @@
 %global php php70u
 
 Name: uwsgi-plugin-%{php}
-Version: 2.0.12
+Version: 2.0.13.1
 Release: 1.ius%{?dist}
 Summary: uWSGI - Plugin for PHP support
 Group: System Environment/Daemons
@@ -35,11 +35,12 @@ uwsgi packages in EPEL, but built against %{php} from IUS.
 
 %prep
 %setup -q -c -T
+cp -a %{_usrsrc}/uwsgi/%{version}/plugins/php .
 
 
 %build
 export CFLAGS="%{optflags} -Wno-unused-but-set-variable"
-uwsgi --build-plugin "%{_usrsrc}/uwsgi/%{version}/plugins/php %{php}"
+uwsgi --build-plugin "php %{php}"
 
 
 %install
@@ -51,5 +52,8 @@ install -D -p -m 0755 %{php}_plugin.so %{buildroot}%{_libdir}/uwsgi/%{php}_plugi
 
 
 %changelog
+* Wed Aug 10 2016 Carl George <carl.george@rackspace.com> - 2.0.13.1-1.ius
+- Rebuild against uwsgi 2.0.13.1
+
 * Wed Jul 06 2016 Carl George <carl.george@rackspace.com> - 2.0.12-1.ius
 - Initial package
