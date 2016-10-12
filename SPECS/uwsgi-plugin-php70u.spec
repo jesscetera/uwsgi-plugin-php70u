@@ -7,7 +7,7 @@
 %global php php70u
 
 Name: uwsgi-plugin-%{php}
-Version: 2.0.13.1
+Version: 2.0.14
 Release: 1.ius%{?dist}
 Summary: uWSGI - Plugin for PHP support
 Group: System Environment/Daemons
@@ -22,7 +22,7 @@ BuildRequires: libedit-devel
 BuildRequires: openssl-devel
 BuildRequires: libcap-devel
 BuildRequires: zlib-devel
-Requires: uwsgi-plugin-common
+Requires: uwsgi-plugin-common = %{version}
 
 %{?filter_provides_in: %filter_provides_in %{_libdir}/uwsgi/.*\.so$}
 %{?filter_setup}
@@ -52,6 +52,9 @@ install -D -p -m 0755 %{php}_plugin.so %{buildroot}%{_libdir}/uwsgi/%{php}_plugi
 
 
 %changelog
+* Wed Oct 12 2016 Carl George <carl.george@rackspace.com> - 2.0.14-1.ius
+- Rebuild against uwsgi 2.0.14
+
 * Wed Aug 10 2016 Carl George <carl.george@rackspace.com> - 2.0.13.1-1.ius
 - Rebuild against uwsgi 2.0.13.1
 
